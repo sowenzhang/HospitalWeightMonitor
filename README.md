@@ -43,6 +43,7 @@ POTENTIAL FEATURES
 - a list of recent select patients 
 - authorization and authentication
 - show histories of changes on deleted records 
+- search and filter by patient's name
 
 DATA DESIGN 
 ==============================================================
