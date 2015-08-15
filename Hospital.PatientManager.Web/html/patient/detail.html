@@ -1,0 +1,90 @@
+﻿<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h3>
+            {{vm.title}} > {{vm.patient.FirstName}} {{vm.patient.LastName}}
+        </h3>
+    </div>
+</md-toolbar>
+<md-toolbar class="md-warn" ng-show="vm.message!=''">
+    <div class="md-toolbar-tools">
+        <h5 class="md-flex">{{vm.message}}</h5>
+    </div>
+</md-toolbar>
+<md-content flex md-scroll-y>
+    <ui-view layout="column" layout-fill layout-padding>
+        <div class="inset" hide-sm></div>
+        <div id="patient-content"
+             md-swipe-left="next()"
+             md-swipe-right="previous()"
+             layout="row" layout-align="center center">
+
+            <md-card flex-gt-sm="90" flex-gt-md="80">
+                <md-card-content>
+                    <h2>Weight History</h2>
+                    <md-list>
+                        <md-item ng-repeat="item in vm.histories | filter:search">
+                            <md-item-content>
+                                <div class="md-tile-content">
+                                    <h3>{{item.WeightInKg}} kg</h3>
+                                    <p >
+                                        <strong>Notes: </strong>
+                                        {{item.Notes}}
+                                    </p>
+                                </div>
+                                <div class="md-tile-right inset">
+                                    <small>
+                                        {{vm.formatDate(item.RecordDate)}}
+                                    </small>
+                                    <!--Testing only-->
+                                    <md-button class="md-fab md-mini md-warn" aria-label="Delete" ng-confirm-click="vm.removeWeight(item);">
+                                        <ng-md-icon icon="delete"></ng-md-icon>
+                                    </md-button>
+                                </div>
+                            </md-item-content>
+                            <md-divider hide-sm ng-if="!$last"></md-divider>
+                            <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+                        </md-item>
+                        <md-divider></md-divider>
+                        <md-item layout class="inset">
+                            <md-button layout layout-align="start center" flex class="md-primary" ng-click="vm.showAddWeight($event);">
+                                <md-tooltip md-direction="top">
+                                    Record a weight data for this patient
+                                </md-tooltip>
+                                <ng-md-icon icon="add" title=""></ng-md-icon> Record a weight
+                            </md-button>
+                        </md-item>
+                    </md-list>
+
+                    <div ng-show="vm.histories.length == 0">
+                        Ahh, this patient doesn't have any weight history!
+                        <md-list>
+                            <md-item layout class="inset">
+                                <md-button layout layout-align="start center" flex class="md-primary" ng-click="vm.showAddWeight($event);">
+                                    <md-tooltip md-direction="top">
+                                        Record a weight data for this patient
+                                    </md-tooltip>
+                                    <ng-md-icon icon="add" title=""></ng-md-icon> Record a weight
+                                </md-button>
+                            </md-item>
+                        </md-list>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+
+        <div id="patient-history-content" ng-show="vm.histories.length > 0"
+             md-swipe-left="next()"
+             md-swipe-right="previous()" layout="row" layout-align="center center">
+            <md-card flex-gt-sm="90" flex-gt-md="80">
+                <md-card-content>
+                    <h2>Weight History Chart</h2>
+                    
+                    <div layout layout-align="center center" class="inset">
+                        <div ac-chart="vm.chart.type" ac-data="vm.chart.data" ac-config="vm.chart.config" id='chart' class='chart'></div>
+                    </div>
+                </md-card-content>
+
+            </md-card>
+        </div>
+    </ui-view>
+</md-content>

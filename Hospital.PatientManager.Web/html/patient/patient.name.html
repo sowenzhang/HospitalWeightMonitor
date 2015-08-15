@@ -1,0 +1,41 @@
+﻿<md-dialog aria-label="Add Patient">
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <h2>{{vm.title}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.close();">
+                <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-warn" ng-show="vm.message!=''">
+        <div class="md-toolbar-tools">
+            <h5 class="md-flex">{{vm.message}}</h5>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="patientForm">
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>First Name</label>
+                    <input name="firstName" required ng-model="vm.patient.FirstName" placeholder="First Name">
+                    <div ng-messages="patientForm.firstName.$error">
+                        <div ng-message="required">required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Last Name</label> 
+                    <input name="lastName" required placeholder="Last Name" ng-model="vm.patient.LastName">
+                    <div ng-messages="patientForm.lastName.$error">
+                        <div ng-message="required">required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.close();"> Cancel </md-button>
+        <md-button ng-click="vm.submit();" class="md-primary"> Save </md-button>
+    </div>
+</md-dialog>

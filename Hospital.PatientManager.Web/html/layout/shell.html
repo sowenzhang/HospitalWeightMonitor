@@ -1,0 +1,31 @@
+﻿<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-hue-2">
+        <div layout="column" class="md-toolbar-tools-bottom inset">
+            <div>
+                <h2>Administrator</h2>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-list>
+        <md-item ng-repeat="item in vm.menu">
+            <a ui-sref="{{item.link}}">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">
+                        {{item.title}}
+                    </div>
+                </md-item-content>
+            </a>
+        </md-item>
+    </md-list>
+
+    <md-bottom-sheet>
+        <h3>Boston Children Hospital</h3>
+        <h5>Patient Weight Monitor System</h5>
+    </md-bottom-sheet>
+</md-sidenav>
+
+<div layout="column" class="relative" layout-fill role="main" ui-view="content">
+</div>

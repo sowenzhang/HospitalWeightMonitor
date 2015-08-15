@@ -1,0 +1,48 @@
+﻿<md-dialog aria-label="vm.title">
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <h2>{{vm.title}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.close();">
+                <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-warn" ng-show="vm.message!=''">
+        <div class="md-toolbar-tools">
+            <h5 class="md-flex">{{vm.message}}</h5>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="weightForm">
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Current Weight (kg)</label>
+                    <input type="number" required name="weight" ng-model="vm.patient.weight" min="1" max="500">
+                    <div ng-messages="weightForm.weight.$error">
+                        <div ng-message="required">required</div>
+                        <div ng-message="min">Too light!</div>
+                        <div ng-message="max">Too heavy!</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Record Date</label>
+                    <input type="date" required name="recordDate" ng-model="vm.patient.recordDate">
+                    <div ng-messages="weightForm.recordDate.$error">
+                        <div ng-message="required">required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+            
+            <md-input-container flex>
+                <label>Notes</label> 
+                <textarea ng-model="vm.patient.notes" columns="1" md-maxlength="150"></textarea> 
+            </md-input-container>
+        </form>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.close();"> Cancel </md-button>
+        <md-button ng-click="vm.submit();" class="md-primary" ng-disabled ="vm.message!=''"> Save </md-button>
+    </div>
+</md-dialog>
